@@ -3,7 +3,9 @@ import React from "react";
 const Prueba = () => {
   return (
     <div>
-      ieeeeeeeeeeeeeeeee
+
+      {"Hola, soy un componente de prueba!"}
+
     </div>
   );
 };
