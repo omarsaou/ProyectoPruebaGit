@@ -18,7 +18,7 @@ function App() {
 
           {/* Páginas privadas (solo si estás logueado) */}
           <Route path="/home" element={<Home />} />
-          <Route path="/event/:id" element={<EventDetails />} />
+          <Route path="/eventid" element={<EventDetails />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-event" element={<CreateEvent />} />
         </Routes>
