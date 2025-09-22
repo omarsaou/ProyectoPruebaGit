@@ -102,7 +102,6 @@ const EventTitle = styled.h3`
   font-weight: bold;
   transition: all 0.3s ease;
   transform: scale(1);
- 
 `;
 
 const EventInfo = styled.p`
@@ -112,7 +111,6 @@ const EventInfo = styled.p`
   font-weight: 500;
   line-height: 1.4;
   transition: all 0.3s ease;
-  
 `;
 
 const Button = styled.button`
@@ -157,7 +155,7 @@ const Button = styled.button`
   }
 `;
 
-// 👇 BOTÓN CENTRADO (opcional, puedes dejarlo o quitarlo)
+// 👇 BOTÓN CENTRADO — EL ÚNICO QUE QUEDA (con pepinillo 🥒)
 const CreateButton = styled(Link)`
   background: linear-gradient(135deg, #4caf50, #2e7d32);
   color: white;
@@ -201,61 +199,44 @@ const CreateButton = styled(Link)`
   }
 `;
 
-// 👇 BOTÓN FLOTANTE MEJORADO — ¡GRANDE, CLARO, CON TEXTO!
-const FloatingActionButton = styled(Link)`
+// 👇 BOTÓN DE PERFIL — ESTILO BACON 🥓 (sólido, sin texturas, sin cuadros)
+const ProfileButton = styled(Link)`
   position: fixed;
-  bottom: 2rem;
+  top: 2rem;
   right: 2rem;
-  background: linear-gradient(135deg, #ff6b35, #d62828);
+  background: #d48b4c; /* Color sólido de bacon dorado */
   color: white;
   border: none;
-  border-radius: 1.5rem;
-  padding: 1rem 1.8rem;
-  font-size: clamp(1rem, 3vw, 1.3rem);
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-size: clamp(1rem, 3vw, 1.2rem);
   font-weight: bold;
   text-decoration: none;
-  box-shadow: 0 6px 0 #a81e1e;
+  box-shadow: 0 4px 0 #8c401a;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  backdrop-filter: blur(8px);
-  border: 3px solid #ffd700;
-  min-width: 200px;
-  text-align: center;
-  animation: pulse 2s infinite;
+  border: 2px solid #ffd700; /* Borde mostaza */
 
   &:hover {
-    transform: translateY(-6px) scale(1.08);
-    box-shadow: 0 12px 0 #a81e1e;
-    background: linear-gradient(135deg, #d62828, #ff6b35);
+    background: #e59e5f; /* Bacon más claro al pasar el ratón */
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 0 #8c401a;
   }
 
   &:active {
     transform: translateY(2px);
-    box-shadow: 0 2px 0 #a81e1e;
+    box-shadow: 0 2px 0 #8c401a;
   }
 
   &::before {
-    content: "🎉 ";
+    content: "🥓 ";
     margin-right: 0.5rem;
-  }
-
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
   }
 `;
-
-const NoEvents = styled.p`
-  text-align: center;
-  font-size: 1.2rem;
-  color: #a87c00;
-  margin: 2rem 0;
-`;
-
 export default function Home() {
   const eventos = [
     { id: 1, nombre: "Fiesta de la Hamburguesa", fecha: "2025-04-15", lugar: "Plaza Mayor" },
@@ -283,12 +264,15 @@ export default function Home() {
         )}
       </EventsContainer>
 
-      {/* 👇 BOTÓN CENTRADO (opcional) */}
+      {/* 👇 ÚNICO BOTÓN DE CREAR EVENTO — EL DEL PEPINILLO 🥒 */}
       <CreateButton to="/create-event">
         ¡CREA TU PROPIO EVENTO!
       </CreateButton>
 
-    
+      {/* 👇 BOTÓN DE PERFIL — ESTILO BACON 🥓 */}
+      <ProfileButton to="/profile">
+        Mi Perfil
+      </ProfileButton>
     </Container>
   );
 }

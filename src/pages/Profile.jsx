@@ -1,4 +1,4 @@
-
+// src/pages/Profile.jsx
 import React from "react";
 import styled from "styled-components";
 import { useUser } from "../UserContext";
@@ -6,7 +6,10 @@ import { useUser } from "../UserContext";
 const Container = styled.div`
   min-height: 100vh;
   padding: 2rem;
+  background: linear-gradient(135deg, #ffcc29, #ff6b35);
   background-image: url('https://www.transparenttextures.com/patterns/food.png');
+  background-size: 300px;
+  background-blend-mode: overlay;
   font-family: "Comic Sans MS", "Chewy", cursive, sans-serif;
 `;
 
@@ -130,16 +133,25 @@ const LogoutButton = styled.button`
   }
 `;
 
+// 👇 MAPEO DE ROLES — ¡ESTO ES LO QUE FALTABA!
+const ROLE_LABELS = {
+  ayudante: "Ayudante de cocina 🔪",
+  ayudado: "Invitado de honor 🍔👑",
+  "": "Sin rol asignado"
+};
+
 export default function Profile() {
   const { userRole } = useUser();
 
-  
+  // 👇 Obtenemos el nombre amigable del rol
+  const roleName = ROLE_LABELS[userRole] || ROLE_LABELS[""];
+
   const user = {
-    name: "Juan Pérez",
-    email: "juan.perez@email.com",
-    dob: "1990-05-12",
-    dni: "12345678A",
-    role: userRole,
+    name: localStorage.getItem('nombreUsuario') || "Usuario",
+    email: "usuario@email.com", // puedes mejorarlo después
+    dob: "1990-01-01", // puedes mejorarlo después
+    dni: "00000000X", // puedes mejorarlo después
+    role: roleName, // 👈 ¡USAMOS EL NOMBRE AMIGABLE!
   };
 
   // Mock de tareas
@@ -157,6 +169,7 @@ export default function Profile() {
   const handleLogout = () => {
     localStorage.removeItem('usuarioLogueado');
     localStorage.removeItem('nombreUsuario');
+    localStorage.removeItem('userRole');
     window.location.href = '/login';
   };
 
@@ -185,7 +198,7 @@ export default function Profile() {
           </InfoItem>
           <InfoItem>
             <Label>Rol:</Label>
-            <Value style={{ textTransform: 'capitalize' }}>{user.role}</Value>
+            <Value>{user.role}</Value> {/* 👈 ¡AHORA MUESTRA EL NOMBRE COMPLETO! */}
           </InfoItem>
         </InfoGrid>
 

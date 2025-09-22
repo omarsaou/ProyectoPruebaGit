@@ -1,6 +1,7 @@
 // src/pages/EventDetails.jsx
 import React from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom"; // 👈 IMPORTAMOS EL HOOK
 
 const Container = styled.div`
   padding: 2rem;
@@ -11,6 +12,7 @@ const Container = styled.div`
 const Title = styled.h2`
   color: #d62828;
   text-align: center;
+  margin-bottom: 1.5rem;
 `;
 
 const Form = styled.form`
@@ -33,15 +35,15 @@ const Button = styled.button`
   padding: 0.8rem 1.5rem;
   border-radius: 0.5rem;
   cursor: pointer;
+  font-size: 1.1rem;
 `;
 
-export default function EventDetails({ match }) {
-  const eventId = match.params.id; // ID del evento
+export default function EventDetails() {
+  const { id } = useParams(); // 👈 ESTA ES LA LÍNEA QUE ARREGLA EL ERROR
 
   return (
     <Container>
-      <Title>Evento: Fiesta de la Hamburguesa</Title>
-      <p>ID del evento: {eventId}</p>
+      <Title>Evento ID: {id} 🍔</Title>
       <Form>
         <Input type="text" placeholder="¿Qué voy a llevar?" />
         <Button type="submit">Confirmar inscripción</Button>
