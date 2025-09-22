@@ -102,7 +102,7 @@ const EventTitle = styled.h3`
   font-weight: bold;
   transition: all 0.3s ease;
   transform: scale(1);
-  class: event-title;
+ 
 `;
 
 const EventInfo = styled.p`
@@ -112,7 +112,7 @@ const EventInfo = styled.p`
   font-weight: 500;
   line-height: 1.4;
   transition: all 0.3s ease;
-  class: event-info;
+  
 `;
 
 const Button = styled.button`
