@@ -21,6 +21,7 @@ function App() {
           <Route path="/event/:id" element={<EventDetails />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-event" element={<CreateEvent />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>

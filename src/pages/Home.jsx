@@ -288,10 +288,7 @@ export default function Home() {
         ¡CREA TU PROPIO EVENTO!
       </CreateButton>
 
-      {/* 👇 BOTÓN FLOTANTE — EL QUE PEDISTE: CLARO, GRANDE, CON TEXTO */}
-      <FloatingActionButton to="/create-event">
-        ¡Crea tu Evento!
-      </FloatingActionButton>
+    
     </Container>
   );
 }
