@@ -1,30 +1,30 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Home from "./pages/Home"; 
-import EventDetails from "./pages/EventDetails"; 
-import Profile from "./pages/Profile";
-import CreateEvent from "./pages/CreateEvent";
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
+import Login from './views/Login';
+import Register from './views/Register';
+import HomeGuest from './views/HomeGuest';
+import HomeUser from './views/HomeUser';
+import HomeAdmin from './views/HomeAdmin';
 
-function App() {
+function ProtectedHome() {
+  const { user } = useAuth();
+
+  if (!user) return <HomeGuest />;
+  if (user.role === 'user') return <HomeUser />;
+  if (user.role === 'admin') return <HomeAdmin />;
+  
+  return <HomeGuest />;
+}
+
+export default function App() {
   return (
     <Router>
-      <div className="App">
-        <Routes>
-          {/* Páginas públicas */}
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-
-          {/* Páginas privadas (solo si estás logueado) */}
-          <Route path="/home" element={<Home />} />
-          <Route path="/event/:id" element={<EventDetails />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/create-event" element={<CreateEvent />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<ProtectedHome />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
     </Router>
   );
 }
-
-export default App;

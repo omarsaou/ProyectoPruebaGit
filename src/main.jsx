@@ -1,12 +1,16 @@
+// src/main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { UserProvider } from './UserContext'; 
+import { AuthProvider } from './context/AuthContext';
+import { AppProvider } from './context/AppContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <UserProvider>  {/* 👈 ENVOLVEMOS LA APP */}
-      <App />
-    </UserProvider>
+    <AuthProvider>
+      <AppProvider>
+        <App />
+      </AppProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
