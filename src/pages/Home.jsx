@@ -20,6 +20,12 @@ const Container = styled.div`
   position: relative;
 `;
 
+// Animación de rebote reutilizable
+const bounce = keyframes`
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+`;
+
 const Title = styled.h1`
   font-size: clamp(2rem, 8vw, 3.5rem);
   color: #d62828;
@@ -37,12 +43,7 @@ const Title = styled.h1`
     transform: translateY(-50%);
     font-size: 2.5rem;
     opacity: 0.5;
-    animation: bounce 2s infinite;
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(-50%) rotate(0deg); }
-    50% { transform: translateY(-60%) rotate(10deg); }
+    animation: ${bounce} 2s infinite;
   }
 `;
 
@@ -50,6 +51,7 @@ const EventsContainer = styled.div`
   width: 100%;
   max-width: 900px;
   margin-bottom: 2rem;
+  padding: 0 1rem;
 `;
 
 const EventCard = styled.div`
@@ -69,7 +71,6 @@ const EventCard = styled.div`
     transform: translateY(-12px) scale(1.02);
     box-shadow: 0 16px 32px rgba(0,0,0,0.2);
     border-color: #d62828;
-
     background: linear-gradient(135deg, #d62828, #ff6b35, #ffd700, #a87c00, #c2eabd, #d0f0c0);
     background-size: 600% 600%;
     animation: gradientToPickle 3.5s ease forwards;
@@ -155,6 +156,14 @@ const Button = styled.button`
   }
 `;
 
+const NoEvents = styled.p`
+  text-align: center;
+  font-size: 1.4rem;
+  color: #d62828;
+  margin-top: 2rem;
+  font-weight: bold;
+`;
+
 // 👇 BOTÓN CENTRADO — EL ÚNICO QUE QUEDA (con pepinillo 🥒)
 const CreateButton = styled(Link)`
   background: linear-gradient(135deg, #4caf50, #2e7d32);
@@ -190,12 +199,7 @@ const CreateButton = styled(Link)`
     content: "🥒";
     margin-right: 0.5rem;
     display: inline;
-    animation: bounce 2s infinite;
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+    animation: ${bounce} 2s infinite;
   }
 `;
 
@@ -237,6 +241,16 @@ const ProfileButton = styled(Link)`
     text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
   }
 `;
+
+// Importamos keyframes aquí para usarlo en múltiples componentes
+const keyframes = (strings, ...values) => {
+  const anim = styled.keyframes(strings, ...values);
+  return anim;
+};
+
+// Creamos la animación una sola vez
+// (Eliminado bounceAnim porque no se usa)
+
 export default function Home() {
   const eventos = [
     { id: 1, nombre: "Fiesta de la Hamburguesa", fecha: "2025-04-15", lugar: "Plaza Mayor" },
