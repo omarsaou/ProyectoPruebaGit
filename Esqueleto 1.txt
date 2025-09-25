@@ -1,0 +1,32 @@
+Esqueleto 1
+
+definir roles ("Guest","admin","user")
+
+ 
+Home (ViewGuest)
+	- Navbar>logo+btnLog+btnReg
+	- bannerIMG>btnEvent"Scroll"
+	- EventBox>EventCards
+	- Footer>rellenoFooter+btnRollBck
+
+
+Home (ViewUser)
+	- Navbar>logo+btnLogout
+	- bannerIMG>btnEvent"Scroll"
+	- EventBox>EventCards>btnEnroll>modalEnroll>btnGuest+btnCook= isbtnCook checked= modalListFood
+		-if Eventcard is Enrolled = EventCard.Enrolled
+	- Footer>rellenoFooter+btnRollBck
+
+Home (ViewAdmin)
+- Navbar>logo+btnLogout
+	- bannerIMG>btnEvent"Scroll">btnCreateEvent
+		-if btnCreateEvent is clicked = open modalCreateEvent
+	- EventBox>EventCards>btnEnroll>modalEnroll>btnGuest+btnCook= isbtnCook checked= modalListFood
+		-if Eventcard is Enrolled = EventCard.Enrolled
+	- Footer>rellenoFooter+btnRollBck
+
+
+Login/Register
+	- LoginBox>Forms
+	- RegisBox>Forms
+
