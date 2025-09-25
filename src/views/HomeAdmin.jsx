@@ -1,3 +1,4 @@
+// src/pages/HomeAdmin.jsx
 import { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import Navbar from '../components/Navbar';
@@ -13,12 +14,20 @@ const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: linear-gradient(135deg, #ff6b35, #ffcc29);
+  font-family: "Comic Sans MS", "Chewy", cursive, sans-serif;
+  background-image: url('https://www.transparenttextures.com/patterns/food.png');
+  background-size: 300px;
+  background-blend-mode: overlay;
+  color: #5e3000;
 `;
 
 const EventsGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 1.5rem;
+  padding: 0 1rem 2rem;
 `;
 
 export default function HomeAdmin() {

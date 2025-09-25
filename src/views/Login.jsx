@@ -1,134 +1,181 @@
-import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+// src/pages/Login.jsx
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-const Page = styled.div`
+const Container = styled.div`
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #f8f9fa;
-  padding: 1rem;
+  background: linear-gradient(135deg, #ff6b35, #ffcc29);
+  font-family: "Comic Sans MS", "Chewy", cursive, sans-serif;
+  background-image: url('https://www.transparenttextures.com/patterns/food.png');
+  background-size: 300px;
+  background-blend-mode: overlay;
 `;
 
 const Card = styled.div`
-  background: white;
+  background: #fdf4e3;
   padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border-radius: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
+  text-align: center;
+  border: 4px solid #d62828;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "🍔";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 2rem;
+    opacity: 0.3;
+  }
 `;
 
 const Title = styled.h2`
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #2d3748;
-  font-size: 1.75rem;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-`;
-
-const InputGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Label = styled.label`
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #4a5568;
+  font-size: 2.2rem;
+  margin-bottom: 1.8rem;
+  color: #d62828;
+  text-shadow: 2px 2px 0 #ffd700;
+  letter-spacing: -0.5px;
 `;
 
 const Input = styled.input`
-  padding: 0.75rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 1rem;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  border: 3px solid #ffd700;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  outline: none;
+  background: #fff9f0;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  text-align: center;
+  box-sizing: border-box;
+
   &:focus {
-    outline: none;
-    border-color: #e53e3e;
+    border-color: #d62828;
+    background: #fff;
+    transform: scale(1.02);
+    box-shadow: 0 0 8px rgba(214, 40, 40, 0.3);
+  }
+
+  &::placeholder {
+    color: #a87c00;
+    text-align: center;
   }
 `;
 
 const Button = styled.button`
-  padding: 0.75rem;
-  background-color: #e53e3e;
+  width: 100%;
+  padding: 1rem;
+  background: #d62828;
   color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
+  border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 0 #a81e1e;
+
   &:hover {
-    background-color: #c53030;
+    background: #ff6b35;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #a81e1e;
+  }
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #a81e1e;
   }
 `;
 
 const Error = styled.p`
-  color: #e53e3e;
-  font-size: 0.875rem;
-  text-align: center;
+  color: #d62828;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #fff;
+`;
+
+const FooterText = styled.p`
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: #5e3000;
+  font-weight: 500;
+
+  a {
+    color: #d62828;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px dotted #ffd700;
+    padding-bottom: 2px;
+
+    &:hover {
+      color: #ff6b35;
+      border-bottom-style: solid;
+    }
+  }
 `;
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (!email || !password) {
-      setError('Por favor, completa todos los campos.');
+      setError("¡Ups! Completa todos los campos carnívoro 🥩");
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
-      setError('Email inválido.');
+      setError("Email inválido. ¿Eres humano o robot? 🤖");
       return;
     }
 
-    login(email, 'user');
-    navigate('/');
+    // Llamada a login (como en el código original)
+    login(email, "user");
+    navigate("/");
   };
 
   return (
-    <Page>
+    <Container>
       <Card>
-        <Title>Iniciar Sesión</Title>
+        <Title>¡ENTRA A LA FIESTA! 🍔</Title>
         {error && <Error>{error}</Error>}
-        <Form onSubmit={handleSubmit}>
-          <InputGroup>
-            <Label>Email</Label>
-            <Input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="tu@email.com"
-            />
-          </InputGroup>
-          <InputGroup>
-            <Label>Contraseña</Label>
-            <Input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-            />
-          </InputGroup>
-          <Button type="submit">Entrar</Button>
-        </Form>
+        <form onSubmit={handleSubmit}>
+          <Input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Tu correo (para las ofertas secretas 🍟)"
+          />
+          <Input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Contraseña (más protegida que la receta del chef 🔐)"
+          />
+          <Button type="submit">¡DAME MI HAMBURGUESA!</Button>
+        </form>
+        <FooterText>
+          ¿Aún no estás en la fiesta? <Link to="/register">ÚNETE AQUÍ</Link>
+        </FooterText>
       </Card>
-    </Page>
+    </Container>
   );
 }
